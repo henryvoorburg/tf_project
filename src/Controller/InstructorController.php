@@ -57,8 +57,7 @@ class InstructorController extends AbstractController
      */
     public function update()
     {
-        $form = $this->createForm(InstructorPersonType
-        ::class);
+        $form = $this->createForm(InstructorPersonType::class);
         return $this->render("instructeur/instructeur_wijzigen.html.twig", ['form' => $form->createView()]);
     }
 
@@ -68,7 +67,8 @@ class InstructorController extends AbstractController
     public function beheer(LessonRepository $lr)
     {
         $personId = $this->getUser()->getId();
-        $lessen = $this->getDoctrine()->getRepository(Lesson::class)->findBy(['instructor' => $this->getDoctrine()->getRepository(Instructor::class)->findOneBy(['person' => $personId])]);
+        $instructor = $this->getDoctrine()->getRepository(Instructor::class)->findOneBy(['person' => $personId]);
+        $lessen = $this->getDoctrine()->getRepository(Lesson::class)->findBy(['instructor' => $instructor]);
         return $this->render("instructeur/les_beheer.html.twig", ['lessen' => $lessen]);
     }
     /**
@@ -80,5 +80,4 @@ class InstructorController extends AbstractController
         $registraties = $this->getDoctrine()->getRepository(Registration::class)->findBy(['lesson' => $actieveLes->getId()]);
         return $this->render("instructeur/deelnemerlijst.html.twig", ['registraties' => $registraties, 'les' => $les]);
     }
-
 }

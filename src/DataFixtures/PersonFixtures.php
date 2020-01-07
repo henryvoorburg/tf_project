@@ -3,11 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\Person;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
-class CPersonFixtures extends BaseFixture
+class PersonFixtures extends BaseFixture implements OrderedFixtureInterface
 {
     public function loadData(ObjectManager $manager)
     {
@@ -24,5 +25,8 @@ class CPersonFixtures extends BaseFixture
                 ->setEnabled(true);
         });
         $manager->flush();
+    }
+    public function getOrder() {
+        return 1;
     }
 }

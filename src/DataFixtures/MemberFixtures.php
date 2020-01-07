@@ -7,10 +7,11 @@ namespace App\DataFixtures;
 use App\Entity\Member;
 use App\Entity\Person;
 use App\Entity\Training;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 
-class MemberFixtures extends BaseFixture
+class MemberFixtures extends BaseFixture implements OrderedFixtureInterface
 {
 
     public function loadData(ObjectManager $manager)
@@ -24,5 +25,8 @@ class MemberFixtures extends BaseFixture
                 ->setPostalCode($this->faker->postcode);
         });
         $manager->flush();
+    }
+    public function getOrder() {
+        return 2;
     }
 }

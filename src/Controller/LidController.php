@@ -69,7 +69,8 @@ class LidController extends AbstractController
      */
     public function uitschrijvenLes(MemberRepository $mm, UrlGeneratorInterface $router, LessonRepository $lr, RegistrationRepository $rr, Request $request, EntityManagerInterface $em, $les_id)
     {
-        $registratie = $rr->findOneBy(['member' => $this->getUser()->getId(), 'lesson' => $les_id]);
+        $user = $this->getUser();
+        $registratie = $rr->findOneBy(['member' => $user->getId(), 'lesson' => $les_id]);
         $em->remove($registratie);
         $em->flush();
         return new RedirectResponse($router->generate('app_lid_inschrijving_overzicht'));
@@ -138,6 +139,6 @@ class LidController extends AbstractController
             'lessen' => $lessonRepository->findBy(['date' => new \DateTime($date)]),
             'lessenRepo' => $lessonRepository,
             'date' => $date,
-            'user_id' => $mr->findOneBy(['person' => $this->getUser()->getId()])        ]);
+            'user_id' => $mr->findOneBy(['person' => $this->getUser()->getId()])]);
     }
 }

@@ -32,9 +32,9 @@ class BezoekerController extends AbstractController
             $em->persist($data);
             $em->persist($member);
             $em->flush();
-            return $this->render("bezoeker/registratie.html.twig", ["info" => $form->createView(), "error" => 0, "success" => "Gebruiker aangemaakt."]);
+            return $this->render("bezoeker/registratie.html.twig", ["info" => $form->createView(), "success" => "Gebruiker aangemaakt."]);
         }
-        return $this->render("bezoeker/registratie.html.twig", ["info" => $form->createView(), "error" => 0]);
+        return $this->render("bezoeker/registratie.html.twig", ["info" => $form->createView()]);
     }
 
     /**
@@ -42,7 +42,7 @@ class BezoekerController extends AbstractController
      */
     public function homepage(LoggerInterface $logger)
     {
-        return $this->render('bezoeker\home.html.twig', []);
+        return $this->render('bezoeker\home.html.twig');
     }
 
     /**
@@ -50,7 +50,7 @@ class BezoekerController extends AbstractController
      */
     public function contact(LoggerInterface $logger)
     {
-        return $this->render('bezoeker\contact.html.twig', []);
+        return $this->render('bezoeker\contact.html.twig');
     }
 
     /**
@@ -58,7 +58,7 @@ class BezoekerController extends AbstractController
      */
     public function gedragregels(LoggerInterface $logger)
     {
-        return $this->render('bezoeker\gedragregels.html.twig', []);
+        return $this->render('bezoeker\gedragregels.html.twig');
     }
 
     /**
@@ -70,13 +70,4 @@ class BezoekerController extends AbstractController
         $aanbod = $em->getRepository(Training::Class)->findAll();
         return $this->render('bezoeker\trainings_aanbod.html.twig', ['aanbod' => $aanbod]);
     }
-//    /**
-//     * @Route("/aanbod", name="app_bezoeker_aanbod")
-//     */
-//    public function aanbod(LoggerInterface $logger) {
-//        $em = $this->getDoctrine()->getManager();
-//        $aanbod = $em->getRepository(Training::Class)->findAll();
-//        return $this->render('bezoeker\trainings_aanbod.html.twig', ['aanbod' => $aanbod]);
-//    }
-
 }

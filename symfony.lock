@@ -401,6 +401,9 @@
     "twig/twig": {
         "version": "v3.0.0"
     },
+    "webimpress/safe-writer": {
+        "version": "2.0.0"
+    },
     "zendframework/zend-code": {
         "version": "3.4.0"
     },

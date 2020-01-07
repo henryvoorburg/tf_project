@@ -7,10 +7,11 @@ namespace App\DataFixtures;
 use App\Entity\Instructor;
 use App\Entity\Person;
 use App\Entity\Training;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 
-class TrainingFixtures extends BaseFixture
+class TrainingFixtures extends BaseFixture implements OrderedFixtureInterface
 {
 
     public function loadData(ObjectManager $manager)
@@ -26,5 +27,8 @@ class TrainingFixtures extends BaseFixture
                 ->setImageName("DOeyFGCVwAASVZt.JPG");
         });
         $manager->flush();
+    }
+    public function getOrder() {
+        return 4;
     }
 }
