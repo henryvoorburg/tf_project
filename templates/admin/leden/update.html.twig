@@ -1,0 +1,9 @@
+{% extends "admin/hoofdpagina.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

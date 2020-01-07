@@ -1,0 +1,10 @@
+{% extends "admin/hoofdpagina.html.twig" %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': "novalidate"}}) }}
+    {{ form_row(form.person) }}
+    {{ form_row(form.hiring_date) }}
+    {{ form_row(form.salary) }}
+    {{ form_row(form.Submit) }}
+    {{ form_end(form) }}
+{% endblock %}

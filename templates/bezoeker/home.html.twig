@@ -1,0 +1,19 @@
+{% extends "bezoeker/bezoeker.html.twig" %}
+
+{% block body %}
+    {% for msg in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ msg }}
+        </div>
+    {% endfor %}
+    <div class="container">
+        <h5 style="color: red">Welkom bij Trainings Centrum Den Haag</h5>
+        <br>
+        <p>Den Haag Training Center is een sportschool waar onder professionele begeleiding in een veilige omgeving
+            verschillende
+            soorten martial arts-, indoor bootcamp, personal- en small group trainingen worden aangeboden. Hier kan je
+            je
+            inschrijven op een les of uitschrijven op een les.</p>
+    </div>
+    <br>
+{% endblock %}

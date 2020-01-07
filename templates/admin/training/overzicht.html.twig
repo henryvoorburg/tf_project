@@ -1,0 +1,41 @@
+{% extends 'admin/hoofdpagina.html.twig' %}
+{% block body %}
+    <div class="container">
+        {% for msg in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        {% endfor %}
+        <h5 style="color: red">Training Overzicht</h5>
+        <div class="container">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consectetur deleniti dicta
+                dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
+                saepe sit veniam?</p>
+            <div class="row">
+                <a href="{{ path('app_admin_training_create') }}"><button class="btn btn-secondary">Nieuwe training</button></a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Sport</th>
+                            <th scope="col">Prijs (EUR)</th>
+                            <th scope="col">Bewerken</th>
+                            <th scope="col">Verwijderen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for training in trainingen %}
+                        <tr>
+                            <th scope="row">{{ training.id }}</th>
+                            <td>{{ training.naam }}</td>
+                            <td>€ {{ training.costs }}</td>
+                            <td><a href="{{ path("app_admin_training_update", {'id': training.id}) }}"><button class="btn btn-warning">Update</button></a></td>
+                            <td><a href="{{ path("app_admin_training_delete", {'id': training.id}) }}"><button class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

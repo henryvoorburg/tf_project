@@ -1,0 +1,74 @@
+{% extends 'bezoeker/bezoeker.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="btn-group mx-auto" role="group" id="group" aria-label="Date group">
+                {#                <button type="button" class="btn btn-secondary">{{ "now"|date("d/m/Y") }}</button>#}
+                <button type="button" class="btn btn-warning">Vandaag</button>
+                {% for i in (0..13) %}
+                    <button type="button"
+                            class="btn btn-warning"
+                            href="">{{ date('now') | date_modify("+#{i} day") | date('D d M') }}</button>
+                {% endfor %}
+            </div>
+            <br>
+            {#                <h4 class="mb-2" style="color: red">Trainingsaanbod</h4>#}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Tijd</th>
+                    <th scope="col">Sport</th>
+                    <th scope="col">Prijs (EUR)</th>
+                    <th scope="col">Meer Info</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for training in aanbod %}
+                    <tr>
+                        <th scope="row">{{ training.id }}</th>
+                        <td>{{ training.duration.format("d/m/Y") }}</td>
+                        <td>{{ training.duration.format("H:i") }}</td>
+                        <td>{{ training.naam }}</td>
+                        <td>€ {{ training.costs }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalLong{{ training.id }}">
+                                Meer Info
+                            </button>
+                        </td>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalLong{{ training.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLongTitle{{ training.id }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"
+                                            id="exampleModalLongTitle{{ training.id }}">{{ training.naam }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{{ asset("training_images/#{training.getImageName}") }}" class="w-100"
+                                             alt="">
+                                        <p class="mt-3">{{ training.description }}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                {% endfor %}
+                <!-- Button trigger modal -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

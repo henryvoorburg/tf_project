@@ -1,0 +1,22 @@
+{% extends 'bezoeker/bezoeker.html.twig' %}
+{% block javascripts %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h4 style="color: red">Lid worden</h4>
+
+    <p>Om gebruik te kunnen maken van de lessen moet je bij ons bekend zijn.</p>
+    <p>Vul hieronder alle gegevens in en registreer jezelf.</p>
+        {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+        {% endif %}
+        {% if success is defined %}
+            <div class="alert alert-success" role="alert">{{ success }}</div>
+        {% endif %}
+        {{ form_start(info, {'attr': {'novalidate': "novalidate"} }) }}
+            {{ form_widget(info) }}
+        {{ form_end(info) }}
+    </div>
+{% endblock %}

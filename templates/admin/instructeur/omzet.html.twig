@@ -1,0 +1,36 @@
+{% extends 'admin/hoofdpagina.html.twig' %}
+{% block body %}
+    <div class="container">
+        {% for msg in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        {% endfor %}
+        <h5 style="color: red">Omzet van instructeur {{ instructor.getPerson.fullname }}</h5>
+        <div class="container">
+            <p>
+                Poen Poen, poen, poen, poen. De een zegt geld, de ander money. Maar wij zeggen poen.
+                Poen, poen, poen, poen.
+                't zal je gedacht zijn wat je allemaal met poen ken doen.
+                Je hoort vaak zeggen dat geluk niet zo te koop is.
+                Maar geld doet wonderen en vooral als 't een hoop is
+            </p>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Omzet in €</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td scope="row">{{ instructor.getPerson.fullname }}</td>
+                        <td scope="row">{{ omzet }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

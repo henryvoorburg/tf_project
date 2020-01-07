@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Training Centrum Den Haag{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset("style.css") }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+    {% endblock %}
+    <div class="row" style="height: 15%">
+        <div class="col-md-8">
+            <link rel="stylesheet" href="{{ asset("css/all.css") }}">
+            <img src="{{ asset("save") }}" width="15%">
+            {#                    <p>Training Centrum Den Haag Image</p>#}
+        </div>
+{#        <div class="col-md-4 my-auto ml-auto">#}
+{#            <div class="container">#}
+{#                {% if is_granted("IS_AUTHENTICATED_FULLY") %}#}
+{#                    <div class="ml-auto">#}
+{#                        <p style="color: red">Welkom {{ app.user.username }}</p>#}
+{#                        <p style="color: red">{{ app.user.getRoles[0] }}</p>#}
+{#                        <a href="{{ path("app_logout") }}"><button class="btn btn-danger">uitloggen</button></a>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#            <br>#}
+{#        </div>#}
+    </div>
+    {% block nav %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item {{ app.request.get('_route') == 'app_admin_main' ? 'active' }}">
+                        <a class="nav-link" href="{{ path("app_admin_main") }}">Home <span
+                                    class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item {{ app.request.get('_route') == 'app_admin_instructeur' ? 'active' }}">
+                        <a class="nav-link" href="{{ path('app_admin_instructeur') }}">Instructeurs</a>
+                    </li>
+                    <li class="nav-item {{ app.request.get('_route') == 'app_admin_leden' ? 'active' }}">
+                        <a class="nav-link" href="{{ path('app_admin_leden') }}">Leden</a>
+                    </li>
+                    <li class="nav-item {{ app.request.get('_route') == 'app_admin_training' ? 'active' }}">
+                        <a class="nav-link" href="{{ path('app_admin_training') }}">Trainingen</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ingelogd als: {{ app.user.loginname }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Rol: {{ app.user.roles[0] }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("app_logout") }}">Uitloggen</a>
+                        </li>
+
+                    {% else %}
+                        <li class="nav-item {{ app.request.get('_route') == 'app_login' ? 'active' }}">
+                            <a class="nav-link" href="{{ path("app_login") }}">Inloggen</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    {% endblock %}
+
+</head>
+<body>
+<div class="container-fluid" style="border: 1px solid black;">
+    <div class="row">
+        <img src="{{ asset("p1.jpg") }}" class="col-4 d-none d-xs-none d-sm-none d-md-none d-lg-block" alt="">
+        <img src="{{ asset("p2.jpg") }}" class="col-4 d-none d-xs-none d-sm-none d-md-none d-lg-block" alt="">
+        <img src="{{ asset("p3.png") }}" class="col-4 d-none d-xs-none d-sm-none d-md-none d-lg-block" alt="">
+    </div>
+    <br>
+    {% block body %}
+        <div class="container">
+            <h5 style="color:red">Homepagina Admin</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consectetur corporis dolores facere hic
+                illo ipsam magni, nesciunt nobis non odit quae qui quo reiciendis repellat rerum vero? Doloremque,
+                minima!</p>
+        </div>
+    {% endblock %}
+</div>
+<footer class="footer" style="background-color: grey;">
+    <div class="container text-center">
+        <h5 style="color: red">Training Centrum Den Haag - 010 519 0532</h5><br>
+        <small> developed by Godwin :-)</small>
+    </div>
+</footer>
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+{% endblock %}
+</body>
+
+</html>

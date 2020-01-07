@@ -1,0 +1,46 @@
+{% extends 'instructeur/hoofdpagina.html.twig' %}
+{% block body %}
+    <div class="container">
+        {% for msg in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        {% endfor %}
+        <h5 style="color: red">Deelnemerslijst van de les van {{ app.user.fullname }}</h5> {#TODO: Uit database halen i.p.v actieve gebruiker (bij alle user specifieke overzichten) #}
+        <div class="container">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consectetur deleniti dicta
+                dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
+                    saepe sit veniam?</p>
+                <div class="row">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Geboortedatum</th>
+                        <th scope="col">Geslacht</th>
+                        <th scope="col">Straat</th>
+                        <th scope="col">Postcode</th>
+                        <th scope="col">Stad</th>
+                        <th scope="col">Betaald</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for registratie in registraties %}
+                        <tr>
+                            <td scope="row">{{ registratie.id }}</td>
+                            <td>{{ registratie.member.person.fullname }}</td>
+                            <td>{{ registratie.member.person.dateofbirth.format('d-m-Y') }}</td>
+                            <td>{{ registratie.member.person.gender }}</td>
+                            <td>{{ registratie.member.street }}</td>
+                            <td>{{ registratie.member.postalcode }}</td>
+                            <td>{{ registratie.member.place }}</td>
+                            <td>{{ registratie.payment ? '<i class="fa fa-check-circle" aria-hidden="true"></i>' : '<i class="fa fa-window-close" aria-hidden="true"></i>' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'admin/hoofdpagina.html.twig' %}
+{% block body %}
+    <div class="container">
+        {% for msg in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        {% endfor %}
+        <h5 style="color: red">Instructeur Overzicht</h5>
+        <div class="container">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consectetur deleniti dicta
+                dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
+                saepe sit veniam?</p>
+            <div class="row">
+                <a href="{{path("app_admin_instructeur_create")}}"><button class="btn btn-secondary">Nieuwe instructeur</button></a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Naam</th>
+                            <th scope="col">Geboortedatum</th>
+                            <th scope="col">Geslacht</th>
+                            <th scope="col">Datum van aanname</th>
+                            <th scope="col">Salaris (EUR)</th>
+                            <th scope="col">Bewerken</th>
+                            <th scope="col">Verwijderen</th>
+                            <th scope="col">Inzien</th>
+                            <th scope="col">Omzet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for instructeur in instructeurs %}
+                        <tr>
+                            <td scope="row">{{ instructeur.id }}</td>
+                            <td>{{ instructeur.getPerson.fullName }}</td>
+                            <td>{{ instructeur.getPerson.dateofbirth.format("d/m/Y") }}</td>
+                            <td>{{ instructeur.getPerson.gender }}</td>
+                            <td>{{ instructeur.hiringDate.format("d/m/Y") }}</td>
+                            <td>€ {{ instructeur.salary }}</td>
+                            <td><a href="{{path("app_admin_instructeur_update", {'id': instructeur.getId()})}}"><button class="btn btn-warning">Update</button></a></td>
+                            <td><a href="{{path("app_admin_instructeur_delete", {'id': instructeur.getId() })}}"><button class="btn btn-danger">Delete</button></a></td>
+                            <td><a href="{{path("app_admin_instructeur_les_overzicht", {'id': instructeur.getId()})}}"><button class="btn btn-secondary">Lessen</button></a></td>
+                            <td><a href="{{path("app_admin_instructeur_omzet", {'id': instructeur.getId()})}}"><button class="btn btn-success">Omzet</button></a></td>
+                            {#                            <td><a href="{{path("app_admin_instructeur_delete", {'id': instructeur.getId() })}}"><button class="btn btn-danger">Delete</button></a></td>#}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
