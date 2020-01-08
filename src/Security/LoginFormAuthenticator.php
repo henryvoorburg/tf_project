@@ -65,11 +65,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         $user = $this->entityManager->getRepository(Person::class)->findOneBy(['loginname' => $credentials['username']]);
 
+
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Gebruikersnaam kon niet gevonden worden.');
         }
-
+        if (!$user->isEnabled()) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('Uw account is gedisabled. Neem contact op met Training Center Den Haag');
+        }
         return $user;
     }
 

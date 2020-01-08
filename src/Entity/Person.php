@@ -245,7 +245,7 @@ class Person implements UserInterface
         return $this;
     }
 
-    public function getEnabled()
+    public function isEnabled()
     {
         return (bool)$this->enabled;
     }
