@@ -44,7 +44,6 @@ class AdminInstructorController extends AbstractController
             $data->getPerson()->setRoles(['ROLE_INSTRUCTOR']);
             $em->persist($data);
             $em->flush();
-//            dd($data);
             return new RedirectResponse("/admin/instructeur");
         }
         return $this->render("admin/instructeur/update.html.twig", ['form' => $form->createView()]);

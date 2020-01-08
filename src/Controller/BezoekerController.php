@@ -24,11 +24,13 @@ class BezoekerController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $data->setEnabled(1);
+//            dd($data)
             $member = new Member();
             $member->setStreet($form['street']->getData());
             $member->setPlace($form['place']->getData());
             $member->setPostalCode($form['postal_code']->getData());
-            $data->setRoles(['ROLE_USER']);
+            $data->setRoles(['ROLE_MEMBER']);
             $em->persist($data);
             $em->persist($member);
             $em->flush();

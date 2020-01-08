@@ -18,8 +18,8 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Datum</th>
-                    <th scope="col">Tijd</th>
+{#                    <th scope="col">Datum</th>#}
+{#                    <th scope="col">Tijd</th>#}
                     <th scope="col">Sport</th>
                     <th scope="col">Prijs (EUR)</th>
                     <th scope="col">Meer Info</th>
@@ -29,8 +29,8 @@
                 {% for training in aanbod %}
                     <tr>
                         <th scope="row">{{ training.id }}</th>
-                        <td>{{ training.duration.format("d/m/Y") }}</td>
-                        <td>{{ training.duration.format("H:i") }}</td>
+{#                        <td>{{ training.duration.format("d/m/Y") }}</td>#}
+{#                        <td>{{ training.duration.format("H:i") }}</td>#}
                         <td>{{ training.naam }}</td>
                         <td>€ {{ training.costs }}</td>
                         <td>
