@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonRepository")
- * @UniqueEntity(fields={"loginname"}, message="Gebruikersnaam al in gebruik.")
+ * @UniqueEntity(fields={"loginname"}, message="Gebruikersnaam is al in gebruik.")
+ * @UniqueEntity(fields={"emailadres"}, message="Email is al in gebruik.")
  */
 class Person implements UserInterface
 {
@@ -64,7 +65,7 @@ class Person implements UserInterface
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=255,unique=true)
+     * @ORM\Column(name="emailadres", type="string", length=255,unique=true)
      * @Assert\NotBlank(message="Vul een geldig e-mailadres in.")
      */
     private $emailadres;

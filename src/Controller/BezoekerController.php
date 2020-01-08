@@ -24,6 +24,7 @@ class BezoekerController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $data->setPassword(password_hash($data->getPassword(), PASSWORD_BCRYPT));
             $data->setEnabled(1);
 //            dd($data)
             $member = new Member();

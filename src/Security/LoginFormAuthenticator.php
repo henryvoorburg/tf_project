@@ -79,7 +79,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        if ($credentials['password'] == $user->getPassword()) {
+        if (password_hash($credentials['password'], PASSWORD_BCRYPT) == $user->getPassword()) {
             return true;
         }
         throw new CustomUserMessageAuthenticationException("Ongeldige inloggegevens.");
