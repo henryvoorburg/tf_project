@@ -15,7 +15,7 @@ class PersonFixtures extends BaseFixture implements OrderedFixtureInterface
         $this->createMany(Person::Class, 20, function (Person $person, $count) {
             $person
                 ->setLoginname("person".$count)
-                ->setPassword($count)
+                ->setPassword(password_hash($count,PASSWORD_BCRYPT))
                 ->setFirstname($this->faker->firstname)
                 ->setLastname($this->faker->lastname)
                 ->setDateofbirth($this->faker->dateTimeBetween('-10000 days', '-1000 days'))
