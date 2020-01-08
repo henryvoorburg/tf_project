@@ -11,20 +11,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class BezoekerController extends AbstractController
 {
     /**
      * @Route("/member_worden", name="app_bezoeker_registratie")
      */
-    public function registratiePage(EntityManagerInterface $em, Request $request)
+    public function registratiePage(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $encoder)
     {
 //        dd($this->container->);
         $form = $this->createForm(PersonType::Class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $data->setPassword(password_hash($data->getPassword(), PASSWORD_BCRYPT));
+            $encoded = $encoder->encodePassword($data, $data->getPassword());
+            $data->setPassword($encoded);
+//            $data->setPassword(password_hash($data->getPassword(), PASSWORD_BCRYPT));
             $data->setEnabled(1);
 //            dd($data)
             $member = new Member();
