@@ -6,7 +6,11 @@
 {% block body %}
     <div class="container">
     <h4 style="color: red">Lid worden</h4>
-
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
     <p>Om gebruik te kunnen maken van de lessen moet je bij ons bekend zijn.</p>
     <p>Vul hieronder alle gegevens in en registreer jezelf.</p>
         {{ form_start(info, {'attr': {'novalidate': "novalidate"} }) }}

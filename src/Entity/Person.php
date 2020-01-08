@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonRepository")
+ * @UniqueEntity(fields={"loginname"}, message="Gebruikersnaam al in gebruik.")
  */
 class Person implements UserInterface
 {
@@ -21,7 +23,7 @@ class Person implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(name="loginname", type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Vul een geldig gebruikersnaam in.")
      */
     private $loginname;

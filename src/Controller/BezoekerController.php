@@ -34,7 +34,8 @@ class BezoekerController extends AbstractController
             $em->persist($data);
             $em->persist($member);
             $em->flush();
-            return $this->render("bezoeker/registratie.html.twig", ["info" => $form->createView(), "success" => "Gebruiker aangemaakt."]);
+            $this->addFlash('success', 'Gebruiker aangemaakt.');
+            return $this->render("bezoeker/registratie.html.twig", ["info" => $form->createView()]);
         }
         return $this->render("bezoeker/registratie.html.twig", ["info" => $form->createView()]);
     }
