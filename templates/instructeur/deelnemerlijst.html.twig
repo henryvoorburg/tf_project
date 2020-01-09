@@ -35,7 +35,7 @@
                             <td>{{ registratie.member.street }}</td>
                             <td>{{ registratie.member.postalcode }}</td>
                             <td>{{ registratie.member.place }}</td>
-                            <td>{{ registratie.payment ? '<i class="fa fa-check-circle" aria-hidden="true"></i>' : '<i class="fa fa-window-close" aria-hidden="true"></i>' }}</td>
+                            <td>{{ registratie.payment ? '<button class="btn btn-warning">Niet betaald</button>' : '<button class="btn btn-primary">Betaald</button>' }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
