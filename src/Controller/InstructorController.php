@@ -80,4 +80,13 @@ class InstructorController extends AbstractController
         $registraties = $this->getDoctrine()->getRepository(Registration::class)->findBy(['lesson' => $actieveLes->getId()]);
         return $this->render("instructeur/deelnemerlijst.html.twig", ['registraties' => $registraties, 'les' => $les]);
     }
+    /**
+     * @Route("/instructeur/{regID}/{payment}/betaling", name="app_instructor_betaal_wijziging")
+     */
+    public function wijzigen(LessonRepository $lr, $regID, $payment)
+    {
+
+        return $this->redirectToRoute("app_instructor_lijst", []);
+    }
+
 }
