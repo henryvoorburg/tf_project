@@ -6,12 +6,13 @@
                 {{ msg }}
             </div>
         {% endfor %}
-        <h5 style="color: red">Deelnemerslijst van de les van {{ app.user.fullname }}</h5> {#TODO: Uit database halen i.p.v actieve gebruiker (bij alle user specifieke overzichten) #}
+        <h5 style="color: red">Deelnemerslijst van de les
+            van {{ app.user.fullname }}</h5> {#TODO: Uit database halen i.p.v actieve gebruiker (bij alle user specifieke overzichten) #}
         <div class="container">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consectetur deleniti dicta
                 dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
-                    saepe sit veniam?</p>
-                <div class="row">
+                saepe sit veniam?</p>
+            <div class="row">
                 <table class="table">
                     <thead>
                     <tr>
@@ -35,7 +36,11 @@
                             <td>{{ registratie.member.street }}</td>
                             <td>{{ registratie.member.postalcode }}</td>
                             <td>{{ registratie.member.place }}</td>
-                            <td>{{ registratie.payment ? "<button class='btn btn-success' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id,payment: 0}) }}">Betaald</button>" : "<a class='btn btn-warning' href='{{ path('app_', {payment: 1}) }}'>Niet betaald</button>" }}</td>
+                            {% if registratie.payment %}
+                                <td><a class='btn btn-success' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id,payment: 0}) }}">Betaald</a>"</td>
+                            {% else %}
+                                <td><a class='btn btn-danger' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id,payment: 1}) }}">Niet betaald</a>"</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>

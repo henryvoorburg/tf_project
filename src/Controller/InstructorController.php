@@ -11,6 +11,7 @@ use App\Form\Type\InstructorPersonType;
 use App\Form\Type\InstructorType;
 use App\Form\Type\PersonType;
 use App\Repository\LessonRepository;
+use App\Repository\RegistrationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -37,17 +38,17 @@ class InstructorController extends AbstractController
     public function create(Request $req, EntityManagerInterface $em)
     {
         $instructor = $em->getRepository(Instructor::Class)->findOneBy(['person' => $this->getUser()->getId()]);
-        if(!$instructor) {
+        if (!$instructor) {
             throw new Exception("Gebruiker is geen instructeur.");
         }
         $form = $this->createForm(LessonType::class);
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-             $data = $form->getData();
-             $data->setInstructor($instructor);
-             $em->persist($data);
-             $em->flush();
-             return new RedirectResponse("/instructeur");
+            $data = $form->getData();
+            $data->setInstructor($instructor);
+            $em->persist($data);
+            $em->flush();
+            return new RedirectResponse("/instructeur");
         }
         return $this->render("instructeur/les_toevoegen.html.twig", ['form' => $form->createView()]);
     }
@@ -71,6 +72,7 @@ class InstructorController extends AbstractController
         $lessen = $this->getDoctrine()->getRepository(Lesson::class)->findBy(['instructor' => $instructor]);
         return $this->render("instructeur/les_beheer.html.twig", ['lessen' => $lessen]);
     }
+
     /**
      * @Route("/instructeur/{les}/lijst", name="app_instructor_lijst")
      */
@@ -80,13 +82,19 @@ class InstructorController extends AbstractController
         $registraties = $this->getDoctrine()->getRepository(Registration::class)->findBy(['lesson' => $actieveLes->getId()]);
         return $this->render("instructeur/deelnemerlijst.html.twig", ['registraties' => $registraties, 'les' => $les]);
     }
+
     /**
      * @Route("/instructeur/{regID}/{payment}/betaling", name="app_instructor_betaal_wijziging")
      */
-    public function wijzigen(LessonRepository $lr, $regID, $payment)
+    public function wijzigen(RegistrationRepository $rr, $regID, $payment, EntityManagerInterface $em)
     {
 
-        return $this->redirectToRoute("app_instructor_lijst", []);
+        $lesson = $rr->findOneBy(['id' => $regID])->getLesson();
+        $id = $lesson->getId();
+        $obj = $rr->find($regID)->setPayment($payment);
+        $em->persist($obj);
+        $em->flush();
+        return $this->redirectToRoute("app_instructor_lijst", ['les' => $id]);
     }
 
 }
