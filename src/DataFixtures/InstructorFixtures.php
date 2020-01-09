@@ -21,10 +21,10 @@ class InstructorFixtures extends BaseFixture implements OrderedFixtureInterface
     {
         $this->createMany(Instructor::Class, 1, function (Instructor $instructor, $count) {
             $personRepo = $this->em->getRepository(Person::class);
-            $person = $start = $this->em->getRepository(Person::class);
+            $person = $this->em->getRepository(Person::class);
             $offset = $this->em->getRepository(Person::class)->findAll()[0]->getId();
-            $end = $this->em->getRepository(Person::class)->findAll()[count($person->findAll())-$offset];
-            $rand = $this->faker->unique()->numberBetween($start, $end);
+            $rand = $this->faker->unique()->numberBetween($offset, $offset + count($person->findAll()));
+//            $end = $this->em->getRepository(Person::class)->findAll()[count(;
             $instructor
                 ->setPerson($personRepo->findOneBy(['id' => $rand]))
                 ->setSalary(2000)
