@@ -84,17 +84,19 @@ class InstructorController extends AbstractController
     }
 
     /**
-     * @Route("/instructeur/{regID}/{payment}/betaling", name="app_instructor_betaal_wijziging")
+     * @Route("/instructeur/{regID}/betaling", name="app_instructor_betaal_wijziging")
      */
-    public function wijzigen(RegistrationRepository $rr, $regID, $payment, EntityManagerInterface $em)
+    public function wijzigen(RegistrationRepository $rr, $regID, EntityManagerInterface $em)
     {
 
         $lesson = $rr->findOneBy(['id' => $regID])->getLesson();
         $id = $lesson->getId();
-        $obj = $rr->find($regID)->setPayment($payment);
+        $registratie = $rr->find($regID);
+        $obj = $registratie->setPayment(!$registratie->getPayment());
         $em->persist($obj);
         $em->flush();
         return $this->redirectToRoute("app_instructor_lijst", ['les' => $id]);
+        // TODO: Blok best langzaam, misschien voor gebruiker updaten en dan met AJAX een call doen?
     }
 
 }

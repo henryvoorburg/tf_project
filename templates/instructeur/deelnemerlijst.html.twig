@@ -37,9 +37,9 @@
                             <td>{{ registratie.member.postalcode }}</td>
                             <td>{{ registratie.member.place }}</td>
                             {% if registratie.payment %}
-                                <td><a class='btn btn-success' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id,payment: 0}) }}">Betaald</a>"</td>
+                                <td><a class='btn btn-success' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id}) }}">Betaald</a>"</td>
                             {% else %}
-                                <td><a class='btn btn-danger' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id,payment: 1}) }}">Niet betaald</a>"</td>
+                                <td><a class='btn btn-danger' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id}) }}">Niet betaald</a>"</td>
                             {% endif %}
                         </tr>
                     {% endfor %}
