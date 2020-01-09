@@ -39,7 +39,7 @@ class Training
 //    private $duration;
 //
     /**
-    * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+    * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
     * @Assert\NotBlank
     * @Assert\PositiveOrZero
     */

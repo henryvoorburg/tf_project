@@ -4,11 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Instructor;
 use App\Entity\Lesson;
+use App\Entity\Member;
+use App\Entity\Person;
 use App\Entity\Registration;
 use App\Form\LessonType;
-use App\Form\Type\A_PersonType;
-use App\Form\Type\InstructorPersonType;
-use App\Form\Type\InstructorType;
 use App\Form\Type\PersonType;
 use App\Repository\LessonRepository;
 use App\Repository\RegistrationRepository;
@@ -54,14 +53,31 @@ class InstructorController extends AbstractController
     }
 
     /**
-     * @Route("/instructeur/{id}/update", name="app_instructor_update")
+     * @Route("/instructeur/update", name="app_instructor_update")
      */
-    public function update()
+    public function instructeurUpdate(EntityManagerInterface $em, Request $request)
     {
-        $form = $this->createForm(InstructorPersonType::class);
-        return $this->render("instructeur/instructeur_wijzigen.html.twig", ['form' => $form->createView()]);
+        $id = $this->getUser()->getId();
+        $entry = $em->getRepository(Person::class)->find($id);
+        $member = $em->getRepository(Member::class)->findOneBy(['person' => $id]);
+        $form = $this->createForm(PersonType::class, $entry);
+        $form->get('street')->setData($member->getStreet());
+        $form->get('postal_code')->setData($member->getPostalCode());
+        $form->get('place')->setData($member->getPlace());
+        $req = $form->handleRequest($request);
+        $data = $req->getData();
+        if ($req->isSubmitted() && $req->isValid()) {
+            $member->setStreet($req['street']->getData());
+            $member->setPostalCode($req['postal_code']->getData());
+            $member->setPlace($req['place']->getData());
+            $em->persist($data);
+            $em->persist($member);
+            $em->flush();
+            $this->addFlash('success', "Waarde(s) bijgewerkt.");
+            return $this->redirectToRoute("app_lid_home");
+        }
+        return $this->render("instructeur/hoofdpagina.html.twig", ['form' => $form->createView()]);
     }
-
     /**
      * @Route("/instructeur/beheer", name="app_instructor_beheer")
      */
@@ -82,6 +98,7 @@ class InstructorController extends AbstractController
         $registraties = $this->getDoctrine()->getRepository(Registration::class)->findBy(['lesson' => $actieveLes->getId()]);
         return $this->render("instructeur/deelnemerlijst.html.twig", ['registraties' => $registraties, 'les' => $les]);
     }
+
 
     /**
      * @Route("/instructeur/{regID}/betaling", name="app_instructor_betaal_wijziging")

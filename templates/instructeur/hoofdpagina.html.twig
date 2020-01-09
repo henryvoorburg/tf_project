@@ -55,6 +55,9 @@
                     <li class="nav-item {{ app.request.get('_route') == 'app_instructor_beheer' ? 'active' }}">
                         <a class="nav-link" href="{{ path('app_instructor_beheer') }}">lessen beheer</a>
                     </li>
+                    <li class="nav-item {{ app.request.get('_route') == 'app_instructor_update' ? 'active' }}">
+                        <a class="nav-link" href="{{ path('app_instructor_update') }}">wijzigen</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
