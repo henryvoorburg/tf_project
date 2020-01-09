@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Member;
 use App\Entity\Training;
 use App\Form\Type\PersonType;
-use App\Repository\LessonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
@@ -27,9 +26,7 @@ class BezoekerController extends AbstractController
             $data = $form->getData();
             $encoded = $encoder->encodePassword($data, $data->getPassword());
             $data->setPassword($encoded);
-//            $data->setPassword(password_hash($data->getPassword(), PASSWORD_BCRYPT));
             $data->setEnabled(1);
-//            dd($data)
             $member = new Member();
             $member->setStreet($form['street']->getData());
             $member->setPlace($form['place']->getData());

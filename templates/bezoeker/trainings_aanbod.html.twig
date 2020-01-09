@@ -3,23 +3,12 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="btn-group mx-auto" role="group" id="group" aria-label="Date group">
-                {#                <button type="button" class="btn btn-secondary">{{ "now"|date("d/m/Y") }}</button>#}
-                <button type="button" class="btn btn-warning">Vandaag</button>
-                {% for i in (0..13) %}
-                    <button type="button"
-                            class="btn btn-warning"
-                            href="">{{ date('now') | date_modify("+#{i} day") | date('D d M') }}</button>
-                {% endfor %}
-            </div>
             <br>
-            {#                <h4 class="mb-2" style="color: red">Trainingsaanbod</h4>#}
+                            <h4 class="mb-2" style="color: red">Trainingsaanbod</h4>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-{#                    <th scope="col">Datum</th>#}
-{#                    <th scope="col">Tijd</th>#}
                     <th scope="col">Sport</th>
                     <th scope="col">Prijs (EUR)</th>
                     <th scope="col">Meer Info</th>

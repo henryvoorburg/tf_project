@@ -19,7 +19,7 @@ class MemberFixtures extends BaseFixture implements OrderedFixtureInterface
         $this->createMany(Member::Class, 5, function (Member $member, $count) {
             $personRepo = $this->referenceRepository->getManager()->getRepository(Person::class);
             $member
-                ->setPerson($personRepo->findOneBy(['id' => $count+1]))
+                ->setPerson($personRepo->findOneBy(['id' => $count]))
                 ->setStreet($this->faker->streetAddress)
                 ->setPlace($this->faker->city)
                 ->setPostalCode($this->faker->postcode);
