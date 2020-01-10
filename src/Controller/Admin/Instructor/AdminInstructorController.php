@@ -12,14 +12,40 @@ use App\Form\Type\A_PersonType;
 use App\Form\Type\InstructorType;
 use App\Form\Type\PersonType;
 use App\Form\Type\TrainingType;
+use App\Repository\InstructorRepository;
+use App\Repository\LessonRepository;
+use App\Repository\RegistrationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminInstructorController extends AbstractController
 {
+    /**
+     * @Route("/admin/instructeur/{id}/{maand}/omzet", name="app_admin_instructeur_omzet2")
+     */
+    public function omzetEndpoint(RegistrationRepository $rr, $id, $maand, InstructorRepository $ir, LessonRepository $lr)
+    {
+        $instructor = $ir->find($id);
+        $lessons = $lr->findBy(['instructor' => $instructor]);
+        $filtered = [];
+        foreach ($lessons as $lesson) {
+            if ($lesson->getDate()->format('m') == date_create_from_format('Y-m-d', '2000-' . $maand . '-1')->format('n')) {
+                array_push($filtered, $lesson);
+                $lesson->getTraining()->getCosts();
+                $lesson->getRegistrations();
+            }
+        }
+        $sum = 0;
+        foreach($filtered as &$lesson) {
+            $sum += $lesson->getTraining()->getCosts() * count($lesson->getRegistrations());
+        }
+//        dd($sum);
+        return new JsonResponse(['sum' =>$sum]);
+    }
 
     /**
      * @Route("/admin/instructeur", name="app_admin_instructeur")
@@ -106,7 +132,7 @@ class AdminInstructorController extends AbstractController
     {
         $lessen = $this->getDoctrine()->getRepository(Lesson::class)->findBy(['instructor' => $id]);
         $instructor = $this->getDoctrine()->getRepository(Instructor::class)->findOneBy(['id' => $id]);
-        if(!$lessen) {
+        if (!$lessen) {
             $omzet = 0;
         } else {
             $omzet = $lessen[0]->getTraining()->getCosts() * count($this->getDoctrine()->getRepository(Registration::class)->findBy(['lesson' => $id, 'payment' => 1]));
@@ -117,5 +143,7 @@ class AdminInstructorController extends AbstractController
             'omzet' => number_format($omzet, 2)
         ]);
     }
+
+
 }
 
