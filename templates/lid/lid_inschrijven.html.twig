@@ -1,4 +1,23 @@
 {% extends '/lid/lid_base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', 'a.date-knop', function (e) {
+                console.log(e.target.id);
+                $.ajax({
+                    url: '{{ path('app_test') }}',
+                    data: {'datum': e.target.id},
+                    success: function (result) {
+                        result.TEST.forEach(element => console.log(element));
+                    }
+                });
+            });
+
+        });
+
+    </script>
+{% endblock %}
 {% block body %}
     <div class="col-md-6 col-sm-12  mx-auto">
         <h4 class="font-weight-bold text-center">Inschrijven op les</h4>
@@ -16,8 +35,8 @@
                     <a class='btn badge badge-pill badge-warning'
                        href="{{ path('app_datum', {date:date("now")|date_modify("+#{i} day")|date("Y-m-d")}) }}">{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}</a>
                 {% else %}
-                    <a class='btn badge badge-pill badge-secondary'
-                       href="{{ path('app_datum', {date:date("now")|date_modify("+#{i} day")|date("Y-m-d")}) }}">{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}</a>
+                    <a class='btn badge badge-pill badge-secondary date-knop'
+                        id="{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}">{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}</a>
                 {% endif %}
             {% endfor %}
             {% if date == 'later' %}
@@ -48,7 +67,7 @@
 
 <button type="button" class="btn btn-warning disabled" data-toggle="modal" data-target="#Modal{{lesson.id}}">
   {{lesson.time.format('H:i')}} (Vol)
-</button>   
+</button>
 {% else %}
 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Modal{{lesson.id}}">
   {{lesson.time.format('H:i')}}

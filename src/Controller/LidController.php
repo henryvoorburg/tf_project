@@ -15,11 +15,17 @@ use App\Repository\RegistrationRepository;
 use App\Repository\TrainingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class LidController extends AbstractController
 {
@@ -102,6 +108,7 @@ class LidController extends AbstractController
         }
         return $this->render("lid/lid_wijzigen.html.twig", ['form' => $form->createView()]);
     }
+
     /**
      * @Route("/lid/inschrijving/les", name="app_inschrijving_les_page")
      */
@@ -116,7 +123,7 @@ class LidController extends AbstractController
     /**
      * @Route("/lid/datum/later", name="app_later_datum")
      */
-    public function laterDatum(LessonRepository $lessonRepository,TrainingRepository $trainingen)
+    public function laterDatum(LessonRepository $lessonRepository, TrainingRepository $trainingen)
     {
         $lessen = null;
         $lessen = $lessonRepository->findBy(['date' => new \DateTime('now')]);
@@ -131,7 +138,7 @@ class LidController extends AbstractController
     /**
      * @Route("/lid/datum/{date}", name="app_datum")
      */
-    public function datum(MemberRepository $mr, LessonRepository $lessonRepository,TrainingRepository $trainingen, $date)
+    public function datum(MemberRepository $mr, LessonRepository $lessonRepository, TrainingRepository $trainingen, $date)
     {
 //        dd($trainingen->findAll());
         return $this->render('lid/lid_inschrijven.html.twig', [

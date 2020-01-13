@@ -32,12 +32,12 @@ class Training
     */
     private $description;
     
-//    /**
-//    * @ORM\Column(type="time")
-//    * @Assert\NotBlank
-//    */
-//    private $duration;
-//
+    /**
+    * @ORM\Column(type="time")
+    * @Assert\NotBlank
+    */
+    private $duration;
+
     /**
     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
     * @Assert\NotBlank

@@ -4,14 +4,6 @@
     <script>
         $(document).ready(function () {
 
-            // $.ajax({
-            //     url: '/admin/instructeur/'+ location.href.split('/')[5] + '/' + $("#maand").val() + "/omzet",
-            //     success: function (result) {
-            //         console.log(result.sum);
-            //         $("#omzet").html(result.sum);
-            //     }
-            // });
-
             $("#maand").change(function (e) {
                 $.ajax({
                     url: '/admin/instructeur/'+ location.href.split('/')[5] + '/' + $("#maand").val() + "/omzet",
