@@ -41,7 +41,7 @@
                             <td>{{ lid.place }}</td>
                             <td>{{ lid.getPerson.getRoles|join(', ')}}</td>
                             <td><a href="{{ path("app_admin_leden_update", {'id': lid.id}) }}"><button class="btn btn-warning">Update</button></a></td>
-                            <td><a href="{{ path("app_admin_leden_delete", {'id': lid.id}) }}"><button class="btn btn-danger">Delete</button></a></td>
+                            <td><a onclick=""><button class="btn btn-danger">Delete</button></a></td>
                             <td><a href="{{ path("app_admin_leden_les_overzicht", {'id': lid.Id()}) }}"><button class="btn btn-secondary">Lessen</button></a></td>
 
                         </tr>

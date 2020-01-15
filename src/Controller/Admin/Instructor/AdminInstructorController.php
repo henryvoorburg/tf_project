@@ -124,6 +124,15 @@ class AdminInstructorController extends AbstractController
         $lessen = $this->getDoctrine()->getRepository(Lesson::class)->findBy(['instructor' => $id]);
         return $this->render("admin/instructeur/les_overzicht.html.twig", ['lessons' => $lessen]);
     }
+    /**
+     * @Route("/admin/les/{id}/deelnemeroverzicht", name="app_admin_instructeur_deelnemerlijst")
+     */
+    public function InstructorLesDeelnemerLijst($id, LessonRepository $lr)
+    {
+        $lesson = $lr->findOneBy(['id' => $id]);
+        $registraties = $lesson->getRegistrations();
+        return $this->render("admin/instructeur/deelnemerlijst.html.twig", ['registraties' => $registraties]);
+    }
 
     /**
      * @Route("/admin/instructeur/{id}/omzet", name="app_admin_instructeur_omzet")

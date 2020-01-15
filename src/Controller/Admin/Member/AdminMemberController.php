@@ -14,6 +14,7 @@ use App\Form\Type\PersonType;
 use App\Form\Type\TrainingType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -81,17 +82,15 @@ class AdminMemberController extends AbstractController
     }
 
     /**
-     * @Route("/admin/leden/{id}/delete", name="app_admin_leden_delete")
+     * @Route("/admin/leden/{id}/delete", name="app_admin_leden_delete", methods={"DELETE"})
      */
-    public function LedenDelete($id)
+    public function LedenDelete($id, Request $request)
     {
         $entry = $this->getDoctrine()->getRepository(Member::class)->find($id);
-//        dd($entry);
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
-        $leden = $this->getDoctrine()->getRepository(Member::class)->findAll();
-        return $this->render("admin/leden/overzicht.html.twig", ['leden' => $leden]);
+        return new JsonResponse(['status' => 200], 200);
     }
 
     /**

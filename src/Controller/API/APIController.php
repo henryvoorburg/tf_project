@@ -35,7 +35,6 @@ class APIController
     public function test(Request $request, LessonRepository $lessonRepository)
     {
         $datum = $request->get('datum');
-        $datum = '2020-1-14';
         $lessen = $lessonRepository->findBy(['date' => new \DateTime($datum)]);
         $content = $this->serial->serialize($lessen, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['person']]);
         return new JsonResponse(['TEST' => json_decode($content)]);

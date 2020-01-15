@@ -1,23 +1,4 @@
 {% extends '/lid/lid_base.html.twig' %}
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        $(document).ready(function () {
-            $(document).on('click', 'a.date-knop', function (e) {
-                console.log(e.target.id);
-                $.ajax({
-                    url: '{{ path('app_test') }}',
-                    data: {'datum': e.target.id},
-                    success: function (result) {
-                        result.TEST.forEach(element => console.log(element));
-                    }
-                });
-            });
-
-        });
-
-    </script>
-{% endblock %}
 {% block body %}
     <div class="col-md-6 col-sm-12  mx-auto">
         <h4 class="font-weight-bold text-center">Inschrijven op les</h4>
@@ -26,8 +7,8 @@
         <div class="col-12">
         </div>
         <div class="groupp" role="group" aria-label="Basic example">
-        {# {{date}}
-        {{date('now').format("Y-m-d")}} #}
+            {# {{date}}
+            {{date('now').format("Y-m-d")}} #}
             <a class='btn badge badge-pill {{ date == date("now").format('Y-m-d') ? 'badge-warning' : 'badge-secondary' }}'
                href="{{ path('app_datum', {date:date("now")|date("Y-m-d")}) }}">Vandaag</a>
             {% for i in 1..8 %}
@@ -35,8 +16,8 @@
                     <a class='btn badge badge-pill badge-warning'
                        href="{{ path('app_datum', {date:date("now")|date_modify("+#{i} day")|date("Y-m-d")}) }}">{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}</a>
                 {% else %}
-                    <a class='btn badge badge-pill badge-secondary date-knop'
-                        id="{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}">{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}</a>
+                    <a class='btn badge badge-pill badge-secondary'
+                       href="{{ path('app_datum', {date:date("now")|date_modify("+#{i} day")|date("Y-m-d")}) }}">{{ date("now")|date_modify("+#{i} day")|date("Y-m-d") }}</a>
                 {% endif %}
             {% endfor %}
             {% if date == 'later' %}
@@ -49,7 +30,7 @@
         {#        {{ dump(lessenRepo.getLaterDatum(date("now")|date_modify("+13 day")|date("Y-m-d"))) }}#}
         <br>
         {% for training in trainingen %}
-        {# {{dump(training.getLessonsByDate(date))}} #}
+            {# {{dump(training.getLessonsByDate(date))}} #}
             {% if training.getLessonsByDate(date) is not empty %}
                 <div class="row mb-4">
                     <div class="col-sm-8">
@@ -63,46 +44,46 @@
                                 {#                                {{ dump(date) }}#}
                                 <ul>
                                 {% if date == lesson.date.format('Y-m-d') or date ==  "later" %}
-                                {% if lesson.maxpersons == lesson.getRegistrations|length %}
+                                    {% if lesson.maxpersons == lesson.getRegistrations|length %}
 
-<button type="button" class="btn btn-warning disabled" data-toggle="modal" data-target="#Modal{{lesson.id}}">
-  {{lesson.time.format('H:i')}} (Vol)
-</button>
-{% else %}
-<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Modal{{lesson.id}}">
-  {{lesson.time.format('H:i')}}
-</button>
+                                        <button type="button" class="btn btn-warning disabled" data-toggle="modal" data-target="#Modal{{lesson.id}}">
+                                            {{lesson.time.format('H:i')}} (Vol)
+                                        </button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Modal{{lesson.id}}">
+                                            {{lesson.time.format('H:i')}}
+                                        </button>
 
-{% endif %}
+                                    {% endif %}
 
-<!-- Modal -->
-<div class="modal fade" id="Modal{{lesson.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Les ID: #{{lesson.id}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <ul>
-        <li>Instructeur: {{lesson.instructor.person.fullName}}</li>
-        <li>Training: {{lesson.training.naam}}</li>
-        <li>Tijd: {{lesson.time.format("H:i")}}</li>
-        <li>Datum: {{lesson.date.format('Y-m-d')}}</li>
-        <li>Aantal ingeschreven leden: {{lesson.getRegistrations|length}}</li>
-        <li>Aantal plekken: {{lesson.getmaxpersons}}</li>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="Modal{{lesson.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Les ID: #{{lesson.id}}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul>
+                                                        <li>Instructeur: {{lesson.instructor.person.fullName}}</li>
+                                                        <li>Training: {{lesson.training.naam}}</li>
+                                                        <li>Tijd: {{lesson.time.format("H:i")}}</li>
+                                                        <li>Datum: {{lesson.date.format('Y-m-d')}}</li>
+                                                        <li>Aantal ingeschreven leden: {{lesson.getRegistrations|length}}</li>
+                                                        <li>Aantal plekken: {{lesson.getmaxpersons}}</li>
 
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <a href="{{ path('app_lid_inschrijving_les', {les_id: lesson.id}) }}"><button type="button" class="btn btn-primary">Inschrijven</button></a>
-        {# <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> #}
-      </div>
-    </div>
-  </div>
-</div>
+                                                    </ul>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{{ path('app_lid_inschrijving_les', {les_id: lesson.id}) }}"><button type="button" class="btn btn-primary">Inschrijven</button></a>
+                                                    {# <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> #}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     </ul>
                                 {% endif %}
                             {% endfor %}

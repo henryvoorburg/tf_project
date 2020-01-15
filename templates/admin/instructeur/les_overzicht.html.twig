@@ -35,7 +35,7 @@
                             <td>{{ lesson.location }}</td>
                             <td>{{ lesson.getTraining.naam }}</td>
                             <td>{{ lesson.getRegistrations|length }}</td>
-                            <td><a href="#">
+                            <td><a href="{{ path('app_admin_instructeur_deelnemerlijst', {id: lesson.id}) }}">
                                     <button class="btn btn-secondary">Inzien</button>
                                 </a></td>
                             {#                            <td><a href="#">#}
