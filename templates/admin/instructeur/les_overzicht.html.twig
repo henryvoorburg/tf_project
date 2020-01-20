@@ -2,7 +2,7 @@
 {% block body %}
     <div class="container">
         {% if lessons is not empty %}
-        <h5 style="color: red">Lesoverzicht van instructeur {{ lessons[0].instructor.person.fullname }}</h5>
+            <h5 style="color: red">Lesoverzicht van instructeur {{ lessons[0].instructor.person.fullname }}</h5>
         {% endif %}
         <div class="container">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consectetur deleniti dicta
@@ -10,42 +10,42 @@
                 saepe sit veniam?</p>
             <div class="row">
                 {#                <a href="{{ path("app_admin_leden_create") }}"><button class="btn btn-secondary">Nieuw lid</button></a>#}
-                    {% if lessons is empty %}
-                        <h4 class="text-center" style="color: red">Deze instructeur heeft geen lessen.</h4>
+                {% if lessons is empty %}
+                    <h4 class="text-center" style="color: red">Deze instructeur heeft geen lessen.</h4>
                 {% else %}
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Datum</th>
-                        <th scope="col">Tijd</th>
-                        <th scope="col">Lokaal</th>
-                        <th scope="col">Sport</th>
-                        <th scope="col">Aantal ingeschreven deelnemers</th>
-                        <th scope="col">Deelnemerslijst</th>
-                        {#                        <th scope="col">Aanpassen</th>#}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for lesson in lessons %}
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td scope="row">{{ lesson.id }}</td>
-                            <td>{{ lesson.date.format('d-m-Y') }}</td>
-                            <td>{{ lesson.time.format("H:i") }}</td>
-                            <td>{{ lesson.location }}</td>
-                            <td>{{ lesson.getTraining.naam }}</td>
-                            <td>{{ lesson.getRegistrations|length }}</td>
-                            <td><a href="{{ path('app_admin_instructeur_deelnemerlijst', {id: lesson.id}) }}">
-                                    <button class="btn btn-secondary">Inzien</button>
-                                </a></td>
-                            {#                            <td><a href="#">#}
-                            {#                                    <button class="btn btn-warning">Aanpassen</button>#}
-                            {#                                </a></td>#}
+                            <th scope="col">#</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Tijd</th>
+                            <th scope="col">Lokaal</th>
+                            <th scope="col">Sport</th>
+                            <th scope="col">Aantal ingeschreven deelnemers</th>
+                            <th scope="col">Deelnemerslijst</th>
+                            {#                        <th scope="col">Aanpassen</th>#}
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                    {% endif %}
+                        </thead>
+                        <tbody>
+                        {% for lesson in lessons %}
+                            <tr>
+                                <td scope="row">{{ lesson.id }}</td>
+                                <td>{{ lesson.date.format('d-m-Y') }}</td>
+                                <td>{{ lesson.time.format("H:i") }}</td>
+                                <td>{{ lesson.location }}</td>
+                                <td>{{ lesson.getTraining.naam }}</td>
+                                <td>{{ lesson.getRegistrations|length }}</td>
+                                <td><a href="{{ path('app_admin_instructeur_deelnemerlijst', {id: lesson.id}) }}">
+                                        <button class="btn btn-secondary">Inzien</button>
+                                    </a></td>
+                                {#                            <td><a href="#">#}
+                                {#                                    <button class="btn btn-warning">Aanpassen</button>#}
+                                {#                                </a></td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
             </div>
         </div>
     </div>
