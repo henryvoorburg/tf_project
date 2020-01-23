@@ -1,6 +1,7 @@
 {% extends '/lid/lid_base.html.twig' %}
 {% block body %}
     <div class="col-md-6 col-sm-12  mx-auto">
+        {# TODO: Refactor het zoeken van lessen. #}
         <h4 class="font-weight-bold text-center">Inschrijven op les</h4>
         <hr>
 
@@ -30,18 +31,15 @@
         {#        {{ dump(lessenRepo.getLaterDatum(date("now")|date_modify("+13 day")|date("Y-m-d"))) }}#}
         <br>
         {% for training in trainingen %}
-            {# {{dump(training.getLessonsByDate(date))}} #}
             {% if training.getLessonsByDate(date) is not empty %}
                 <div class="row mb-4">
                     <div class="col-sm-8">
-                        <img class="w-100 h-100" src="{{ asset("training_images/#{training.getImageName}") }}" alt="">
+                        <img class="w-100 h-100 rounded" src="{{ asset("training_images/#{training.getImageName}") }}" alt="">
                     </div>
                     <div class="col-sm-4">
                         <section>
                             <h2>{{ training.naam }}</h2>
                             {% for lesson in training.getLessonsByDate(date) %}
-                                {#                                {{ dump(lesson.date) }}#}
-                                {#                                {{ dump(date) }}#}
                                 <ul>
                                 {% if date == lesson.date.format('Y-m-d') or date ==  "later" %}
                                     {% if lesson.maxpersons == lesson.getRegistrations|length %}
