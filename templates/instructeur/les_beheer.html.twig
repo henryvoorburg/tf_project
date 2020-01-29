@@ -12,38 +12,40 @@
                 dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
                 saepe sit veniam?</p>
             <div class="row">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Datum</th>
-                        <th scope="col">Tijd</th>
-                        <th scope="col">Lokaal</th>
-                        <th scope="col">Sport</th>
-                        <th scope="col">Aantal ingeschreven deelnemers</th>
-                        <th scope="col">Deelnemerslijst</th>
-                        <th scope="col">Aanpassen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for les in lessen %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td scope="row">{{ les.id }}</td>
-                            <td>{{ les.date.format('d-m-Y') }}</td>
-                            <td>{{ les.time.format("H:i") }}</td>
-                            <td>{{ les.location }}</td>
-                            <td>{{ les.getTraining.naam }}</td>
-                            <td>{{ les.getRegistrations|length }}</td>
-                            <td><a href="{{ path('app_instructor_lijst', {'les': les.id}) }}">
-                                    <button class="btn btn-secondary">Inzien</button>
-                                </a></td>
-                            <td><a href="{{ path('app_instructor_update') }}">
-                                    <button class="btn btn-warning">Aanpassen</button>
-                                </a></td>
+                            <th scope="col">#</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Tijd</th>
+                            <th scope="col">Lokaal</th>
+                            <th scope="col">Sport</th>
+                            <th scope="col">Aantal ingeschreven deelnemers</th>
+                            <th scope="col">Deelnemerslijst</th>
+                            <th scope="col">Aanpassen</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for les in lessen %}
+                            <tr>
+                                <td scope="row">{{ les.id }}</td>
+                                <td>{{ les.date.format('d-m-Y') }}</td>
+                                <td>{{ les.time.format("H:i") }}</td>
+                                <td>{{ les.location }}</td>
+                                <td>{{ les.getTraining.naam }}</td>
+                                <td>{{ les.getRegistrations|length }}</td>
+                                <td><a href="{{ path('app_instructor_lijst', {'les': les.id}) }}">
+                                        <button class="btn btn-secondary">Inzien</button>
+                                    </a></td>
+                                <td><a href="{{ path('app_instructor_update') }}">
+                                        <button class="btn btn-warning">Aanpassen</button>
+                                    </a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

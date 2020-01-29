@@ -11,38 +11,41 @@
             {#        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda consectetur deleniti dicta#}
             {#            dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis#}
             {#            saepe sit veniam?</p>#}
-            <div class="row ">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Datum</th>
-                        <th scope="col">Tijd</th>
-                        <th scope="col">Sport</th>
-                        <th scope="col">Aantal ingeschreven deelnemers</th>
-                        <th scope="col">Prijs (EUR)</th>
-                        <th scope="col">Uitschrijven</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% if registraties == null %}
-                        <p>U bent op geen les(sen) ingeschreven.</p>
-                    {% endif %}
-                    {% for registratie in registraties %}
+            <div class="table-responsive">
+                <div class="row">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{ registratie.id }}</td>
-                            <td>{{ registratie.lesson.date.format("d-m-Y") }}</td>
-                            <td>{{ registratie.lesson.time.format("H:i") }}</td>
-                            <td>{{ registratie.lesson.training.naam }}</td>
-                            <td>{{ registratie.lesson.getRegistrations|length }}</td>
-                            <td>€ {{ registratie.lesson.training.costs }}</td>
-                            <td><a href="{{ path('app_lid_uitschrijving_les', {'les_id': registratie.lesson.id}) }}">
-                                    <button class="btn btn-danger">Uitschrijven</button>
-                                </a></td>
+                            <th scope="col">#</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Tijd</th>
+                            <th scope="col">Sport</th>
+                            <th scope="col">Aantal ingeschreven deelnemers</th>
+                            <th scope="col">Prijs (EUR)</th>
+                            <th scope="col">Uitschrijven</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% if registraties == null %}
+                            <p>U bent op geen les(sen) ingeschreven.</p>
+                        {% endif %}
+                        {% for registratie in registraties %}
+                            <tr>
+                                <td>{{ registratie.id }}</td>
+                                <td>{{ registratie.lesson.date.format("d-m-Y") }}</td>
+                                <td>{{ registratie.lesson.time.format("H:i") }}</td>
+                                <td>{{ registratie.lesson.training.naam }}</td>
+                                <td>{{ registratie.lesson.getRegistrations|length }}</td>
+                                <td>€ {{ registratie.lesson.training.costs }}</td>
+                                <td>
+                                    <a href="{{ path('app_lid_uitschrijving_les', {'les_id': registratie.lesson.id}) }}">
+                                        <button class="btn btn-danger">Uitschrijven</button>
+                                    </a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -12,9 +12,12 @@
                 dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
                 saepe sit veniam?</p>
             <div class="row">
-                <a href="{{path("app_admin_instructeur_create")}}"><button class="btn btn-secondary">Nieuwe instructeur</button></a>
-                <table class="table">
-                    <thead>
+                <a href="{{ path("app_admin_instructeur_create") }}">
+                    <button class="btn btn-secondary">Nieuwe instructeur</button>
+                </a>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Naam</th>
@@ -27,25 +30,35 @@
                             <th scope="col">Inzien</th>
                             <th scope="col">Omzet</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                    {% for instructeur in instructeurs %}
-                        <tr>
-                            <td scope="row">{{ instructeur.id }}</td>
-                            <td>{{ instructeur.getPerson.fullName }}</td>
-                            <td>{{ instructeur.getPerson.dateofbirth.format("d/m/Y") }}</td>
-                            <td>{{ instructeur.getPerson.gender }}</td>
-                            <td>{{ instructeur.hiringDate.format("d/m/Y") }}</td>
-                            <td>€ {{ instructeur.salary }}</td>
-                            <td><a href="{{path("app_admin_instructeur_update", {'id': instructeur.getId()})}}"><button class="btn btn-warning">Update</button></a></td>
-                            <td><a href="{{path("app_admin_instructeur_delete", {'id': instructeur.getId() })}}"><button class="btn btn-danger">Delete</button></a></td>
-                            <td><a href="{{path("app_admin_instructeur_les_overzicht", {'id': instructeur.getId()})}}"><button class="btn btn-secondary">Lessen</button></a></td>
-                            <td><a href="{{path("app_admin_instructeur_omzet", {'id': instructeur.getId()})}}"><button class="btn btn-success">Omzet</button></a></td>
-                            {#                            <td><a href="{{path("app_admin_instructeur_delete", {'id': instructeur.getId() })}}"><button class="btn btn-danger">Delete</button></a></td>#}
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for instructeur in instructeurs %}
+                            <tr>
+                                <td scope="row">{{ instructeur.id }}</td>
+                                <td>{{ instructeur.getPerson.fullName }}</td>
+                                <td>{{ instructeur.getPerson.dateofbirth.format("d/m/Y") }}</td>
+                                <td>{{ instructeur.getPerson.gender }}</td>
+                                <td>{{ instructeur.hiringDate.format("d/m/Y") }}</td>
+                                <td>€ {{ instructeur.salary }}</td>
+                                <td><a href="{{ path("app_admin_instructeur_update", {'id': instructeur.getId()}) }}">
+                                        <button class="btn btn-warning">Update</button>
+                                    </a></td>
+                                <td><a href="{{ path("app_admin_instructeur_delete", {'id': instructeur.getId() }) }}">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </a></td>
+                                <td>
+                                    <a href="{{ path("app_admin_instructeur_les_overzicht", {'id': instructeur.getId()}) }}">
+                                        <button class="btn btn-secondary">Lessen</button>
+                                    </a></td>
+                                <td><a href="{{ path("app_admin_instructeur_omzet", {'id': instructeur.getId()}) }}">
+                                        <button class="btn btn-success">Omzet</button>
+                                    </a></td>
+                                {#                            <td><a href="{{path("app_admin_instructeur_delete", {'id': instructeur.getId() })}}"><button class="btn btn-danger">Delete</button></a></td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

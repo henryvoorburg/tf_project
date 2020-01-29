@@ -12,9 +12,12 @@
                 dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
                 saepe sit veniam?</p>
             <div class="row">
-                <a href="{{ path("app_admin_leden_create") }}"><button class="btn btn-secondary">Nieuw lid</button></a>
-                <table class="table">
-                    <thead>
+                <a href="{{ path("app_admin_leden_create") }}">
+                    <button class="btn btn-secondary">Nieuw lid</button>
+                </a>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Naam</th>
@@ -28,26 +31,33 @@
                             <th scope="col">Verwijderen</th>
                             <th scope="col">Lessen</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                    {% for lid in leden %}
-                        <tr>
-                            <td scope="row">{{ lid.id }}</td>
-                            <td>{{ lid.getPerson.fullName }}</td>
-                            <td>{{ lid.getPerson.dateofbirth.format("d/m/Y") }}</td>
-                            <td>{{ lid.getPerson.gender }}</td>
-                            <td>{{ lid.street }}</td>
-                            <td>{{ lid.postalCode }}</td>
-                            <td>{{ lid.place }}</td>
-                            <td>{{ lid.getPerson.getRoles|join(', ')}}</td>
-                            <td><a href="{{ path("app_admin_leden_update", {'id': lid.id}) }}"><button class="btn btn-warning">Update</button></a></td>
-                            <td><a onclick=""><button class="btn btn-danger">Delete</button></a></td>
-                            <td><a href="{{ path("app_admin_leden_les_overzicht", {'id': lid.Id()}) }}"><button class="btn btn-secondary">Lessen</button></a></td>
+                        </thead>
+                        <tbody>
+                        {% for lid in leden %}
+                            <tr>
+                                <td scope="row">{{ lid.id }}</td>
+                                <td>{{ lid.getPerson.fullName }}</td>
+                                <td>{{ lid.getPerson.dateofbirth.format("d/m/Y") }}</td>
+                                <td>{{ lid.getPerson.gender }}</td>
+                                <td>{{ lid.street }}</td>
+                                <td>{{ lid.postalCode }}</td>
+                                <td>{{ lid.place }}</td>
+                                <td>{{ lid.getPerson.getRoles|join(', ') }}</td>
+                                <td><a href="{{ path("app_admin_leden_update", {'id': lid.id}) }}">
+                                        <button class="btn btn-warning">Update</button>
+                                    </a></td>
+                                <td><a onclick="">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </a></td>
+                                <td><a href="{{ path("app_admin_leden_les_overzicht", {'id': lid.Id()}) }}">
+                                        <button class="btn btn-secondary">Lessen</button>
+                                    </a></td>
 
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

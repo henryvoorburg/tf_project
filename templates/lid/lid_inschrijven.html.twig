@@ -34,55 +34,59 @@
             {% if training.getLessonsByDate(date) is not empty %}
                 <div class="row mb-4">
                     <div class="col-sm-8">
-                        <img class="w-100 h-100 rounded" src="{{ asset("training_images/#{training.getImageName}") }}" alt="">
+                        <img class="w-100 h-100 rounded" src="{{ asset("training_images/#{training.getImageName}") }}"
+                             alt="">
                     </div>
                     <div class="col-sm-4">
                         <section>
                             <h2>{{ training.naam }}</h2>
                             {% for lesson in training.getLessonsByDate(date) %}
-                                <ul>
                                 {% if date == lesson.date.format('Y-m-d') or date ==  "later" %}
                                     {% if lesson.maxpersons == lesson.getRegistrations|length %}
-
-                                        <button type="button" class="btn btn-warning disabled" data-toggle="modal" data-target="#Modal{{lesson.id}}">
-                                            {{lesson.time.format('H:i')}} (Vol)
+                                        <button type="button" class="btn btn-warning disabled" data-toggle="modal"
+                                                data-target="#Modal{{ lesson.id }}">
+                                            {{ lesson.time.format('H:i') }} (Vol)
                                         </button>
                                     {% else %}
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#Modal{{lesson.id}}">
-                                            {{lesson.time.format('H:i')}}
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                data-target="#Modal{{ lesson.id }}">
+                                            {{ lesson.time.format('H:i') }}
                                         </button>
-
                                     {% endif %}
-
                                     <!-- Modal -->
-                                    <div class="modal fade" id="Modal{{lesson.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="Modal{{ lesson.id }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Les ID: #{{lesson.id}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Les ID:
+                                                        #{{ lesson.id }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <ul>
-                                                        <li>Instructeur: {{lesson.instructor.person.fullName}}</li>
-                                                        <li>Training: {{lesson.training.naam}}</li>
-                                                        <li>Tijd: {{lesson.time.format("H:i")}}</li>
-                                                        <li>Datum: {{lesson.date.format('Y-m-d')}}</li>
-                                                        <li>Aantal ingeschreven leden: {{lesson.getRegistrations|length}}</li>
-                                                        <li>Aantal plekken: {{lesson.getmaxpersons}}</li>
-
+                                                        <li>Instructeur: {{ lesson.instructor.person.fullName }}</li>
+                                                        <li>Training: {{ lesson.training.naam }}</li>
+                                                        <li>Tijd: {{ lesson.time.format("H:i") }}</li>
+                                                        <li>Datum: {{ lesson.date.format('Y-m-d') }}</li>
+                                                        <li>Aantal ingeschreven
+                                                            leden: {{ lesson.getRegistrations|length }}</li>
+                                                        <li>Aantal plekken: {{ lesson.getmaxpersons }}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="{{ path('app_lid_inschrijving_les', {les_id: lesson.id}) }}"><button type="button" class="btn btn-primary">Inschrijven</button></a>
+                                                    <a href="{{ path('app_lid_inschrijving_les', {les_id: lesson.id}) }}">
+                                                        <button type="button" class="btn btn-primary">Inschrijven
+                                                        </button>
+                                                    </a>
                                                     {# <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> #}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    </ul>
                                 {% endif %}
                             {% endfor %}
                         </section>

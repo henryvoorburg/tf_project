@@ -13,38 +13,44 @@
                 dolorem eveniet fuga inventore, iste libero minima nemo obcaecati optio, quam quis recusandae reiciendis
                 saepe sit veniam?</p>
             <div class="row">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Naam</th>
-                        <th scope="col">Geboortedatum</th>
-                        <th scope="col">Geslacht</th>
-                        <th scope="col">Straat</th>
-                        <th scope="col">Postcode</th>
-                        <th scope="col">Stad</th>
-                        <th scope="col">Betaald</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for registratie in registraties %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td scope="row">{{ registratie.id }}</td>
-                            <td>{{ registratie.member.person.fullname }}</td>
-                            <td>{{ registratie.member.person.dateofbirth.format('d-m-Y') }}</td>
-                            <td>{{ registratie.member.person.gender }}</td>
-                            <td>{{ registratie.member.street }}</td>
-                            <td>{{ registratie.member.postalcode }}</td>
-                            <td>{{ registratie.member.place }}</td>
-                            {% if registratie.payment %}
-                                <td><a class='btn btn-success' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id}) }}">Betaald</a></td>
-                            {% else %}
-                                <td><a class='btn btn-danger' href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id}) }}">Niet betaald</a></td>
-                            {% endif %}
+                            <th scope="col">#</th>
+                            <th scope="col">Naam</th>
+                            <th scope="col">Geboortedatum</th>
+                            <th scope="col">Geslacht</th>
+                            <th scope="col">Straat</th>
+                            <th scope="col">Postcode</th>
+                            <th scope="col">Stad</th>
+                            <th scope="col">Betaald</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for registratie in registraties %}
+                            <tr>
+                                <td scope="row">{{ registratie.id }}</td>
+                                <td>{{ registratie.member.person.fullname }}</td>
+                                <td>{{ registratie.member.person.dateofbirth.format('d-m-Y') }}</td>
+                                <td>{{ registratie.member.person.gender }}</td>
+                                <td>{{ registratie.member.street }}</td>
+                                <td>{{ registratie.member.postalcode }}</td>
+                                <td>{{ registratie.member.place }}</td>
+                                {% if registratie.payment %}
+                                    <td><a class='btn btn-success'
+                                           href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id}) }}">Betaald</a>
+                                    </td>
+                                {% else %}
+                                    <td><a class='btn btn-danger'
+                                           href="{{ path('app_instructor_betaal_wijziging', {regID:registratie.id}) }}">Niet
+                                            betaald</a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -42,7 +42,7 @@ class LidController extends AbstractController
      */
     public function inschrijven(LessonRepository $lr, TrainingRepository $tr)
     {
-        return $this->render("lid/lid_inschrijven.html.twig", ['lessons' => $lr->findAll(), 'trainingen' => $tr->findAll(),]);
+        return $this->render("lid/lid_inschrijven.html.twig", ['lessons' => $lr->findAll(), 'trainingen' => $tr->findAll()]);
     }
 
     /**

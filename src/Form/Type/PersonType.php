@@ -56,7 +56,7 @@ class PersonType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Person::Class
+            'data_class' => Person::class
         ]);
     }
 }
