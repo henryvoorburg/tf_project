@@ -24,7 +24,7 @@ class PersonTypeInstructor extends AbstractType
     {
         $builder
             ->add('firstname', TextType::Class, ['attr' => ['class' => "form-control col-"], 'label' => 'Voornaam'])
-            ->add('preprovision', TextType::Class, ['attr' => ['class' => "form-control"], 'label' => 'Voortzetels'])
+            ->add('preprovision', TextType::Class, ['attr' => ['class' => "form-control"], 'label' => 'Voortzetels', 'required' => false])
             ->add('lastname', TextType::Class, ['attr' => ['class' => "form-control"], 'label' => 'Achternaam'])
             ->add('dateofbirth', BirthdayType::Class, ['label' => 'Geboortedatum'])
             ->add('loginname', TextType::Class, ['attr' => ['class' => "form-control"], 'label' => 'Gebruikersnaam'])
