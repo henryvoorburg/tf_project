@@ -25,10 +25,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminInstructorController extends AbstractController
 {
     /**
-     * @Route("/admin/instructeur/{id}/{maand}/omzet", name="app_admin_instructeur_omzet2")
+     * @Route("/admin/instructeur/omzet", name="app_admin_instructeur_omzet2")
      */
-    public function omzetEndpoint(RegistrationRepository $rr, $id, $maand, InstructorRepository $ir, LessonRepository $lr)
+    public function omzetEndpoint(Request $request,RegistrationRepository $rr, InstructorRepository $ir, LessonRepository $lr)
     {
+        $maand = $request->get('maand');
+        $id = $request->get('instructeur');
         $instructor = $ir->find($id);
         $lessons = $lr->findBy(['instructor' => $instructor]);
         $filtered = [];
