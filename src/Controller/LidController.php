@@ -91,7 +91,7 @@ class LidController extends AbstractController
         $entry = $em->getRepository(Person::class)->find($id);
         $member = $em->getRepository(Member::class)->findOneBy(['person' => $id]);
         $form = $this->createForm(PersonType::class, $entry);
-        $form->get('street')->setData($member->getStreet());
+//        $form->get('street')->setData($member->getStreet());
         $form->get('postal_code')->setData($member->getPostalCode());
         $form->get('place')->setData($member->getPlace());
         $req = $form->handleRequest($request);
