@@ -6,8 +6,8 @@
     <title>{% block title %}Training Centrum Den Haag{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset("style.css") }}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous">
     {% endblock %}
     <div class="row" style="height: 15%">
@@ -50,10 +50,12 @@
                                     class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item {{ app.request.get('_route') == 'app_datum' ? 'active' }}">
-                        <a class="nav-link" href="{{ path('app_datum', {date: date('now')|date("Y-m-d")}) }}">Inschrijven op les</a>
+                        <a class="nav-link" href="{{ path('app_datum', {date: date('now')|date("Y-m-d")}) }}">Inschrijven
+                            op les</a>
                     </li>
                     <li class="nav-item {{ app.request.get('_route') == 'app_lid_inschrijving_overzicht' ? 'active' }}">
-                        <a class="nav-link" href="{{ path('app_lid_inschrijving_overzicht') }}">Overzicht inschrijvingen</a>
+                        <a class="nav-link" href="{{ path('app_lid_inschrijving_overzicht') }}">Overzicht
+                            inschrijvingen</a>
                     </li>
                     <li class="nav-item {{ app.request.get('_route') == 'app_lid_wijzigen' ? 'active' }}">
                         <a class="nav-link" href="{{ path('app_lid_wijzigen') }}">Gegevens lid wijzigen</a>
@@ -61,15 +63,15 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Ingelogd als: {{ app.user.fullname }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Rol: {{ app.user.roles[0] }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path("app_logout") }}">Uitloggen</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ingelogd als: {{ app.user.fullname }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Rol: {{ app.user.roles[0] }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("app_logout") }}">Uitloggen</a>
+                        </li>
 
                     {% else %}
                         <li class="nav-item {{ app.request.get('_route') == 'app_login' ? 'active' }}">
@@ -104,8 +106,13 @@
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 {% endblock %}
 </body>
 

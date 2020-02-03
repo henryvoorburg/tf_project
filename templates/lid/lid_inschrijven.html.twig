@@ -1,4 +1,12 @@
 {% extends '/lid/lid_base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+    <style>
+        ul li {
+            list-style-type: none;
+        }
+    </style>
+{% endblock %}
 {% block body %}
     <div class="col-md-6 col-sm-12  mx-auto">
         {# TODO: Refactor het zoeken van lessen. #}
@@ -8,8 +16,6 @@
         <div class="col-12">
         </div>
         <div class="groupp" role="group" aria-label="Basic example">
-            {# {{date}}
-            {{date('now').format("Y-m-d")}} #}
             <a class='btn badge badge-pill {{ date == date("now").format('Y-m-d') ? 'badge-warning' : 'badge-secondary' }}'
                href="{{ path('app_datum', {date:date("now")|date("Y-m-d")}) }}">Vandaag</a>
             {% for i in 1..8 %}
@@ -28,7 +34,6 @@
             {% endif %}
         </div>
         <div class="col-md-12"><br></div>
-        {#        {{ dump(lessenRepo.getLaterDatum(date("now")|date_modify("+13 day")|date("Y-m-d"))) }}#}
         <br>
         {% for training in trainingen %}
             {% if training.getLessonsByDate(date) is not empty %}
@@ -40,8 +45,8 @@
                     <div class="col-sm-4">
                         <section>
                             <h2>{{ training.naam }}</h2>
-                            {% for lesson in training.getLessonsByDate(date) %}
-                                {% if date == lesson.date.format('Y-m-d') or date ==  "later" %}
+                            {% for lesson in training.getLessonsByDate(date) %} {# Loop door de lessen heen voor de trainingen die vallen op deze dag #}
+                                {% if date == lesson.date.format('Y-m-d') or date ==  "later" %} {# Check als de les vandaag is, zo ja laat deze zien aan de gebruiker. #}
                                     {% if lesson.maxpersons == lesson.getRegistrations|length %}
                                         <button type="button" class="btn btn-warning disabled" data-toggle="modal"
                                                 data-target="#Modal{{ lesson.id }}">
@@ -76,13 +81,10 @@
                                                             leden: {{ lesson.getRegistrations|length }}</li>
                                                         <li>Aantal plekken: {{ lesson.getmaxpersons }}</li>
                                                     </ul>
-                                                </div>
-                                                <div class="modal-footer">
+                                                    <hr>
                                                     <a href="{{ path('app_lid_inschrijving_les', {les_id: lesson.id}) }}">
-                                                        <button type="button" class="btn btn-primary">Inschrijven
-                                                        </button>
+                                                        <button type="button" class="btn btn-primary btn-lg btn-block">Inschrijven</button>
                                                     </a>
-                                                    {# <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> #}
                                                 </div>
                                             </div>
                                         </div>
@@ -94,20 +96,5 @@
                 </div>
             {% endif %}
         {% endfor %}
-        <style>
-            ul li {
-                list-style-type: none;
-            }
-
-        </style>
-        {#        {% else %}#}
-        {#            {% for les in lessen %}#}
-        {#                <img class="w-50" src="{{ asset("training_images/#{les.training.getImageName}") }}" alt="">#}
-        {#                <section>#}
-        {#                    <h5>{{ les.training.naam }}</h5>#}
-        {#                    <p class="mx-auto my-auto">{{ les.training.duration.format('H:i') }}</p>#}
-        {#                </section>#}
-        {#            {% endfor %}#}
-        {#        {% endif %}#}
     </div>
 {% endblock %}

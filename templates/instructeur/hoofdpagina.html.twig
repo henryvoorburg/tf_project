@@ -6,8 +6,8 @@
     <title>{% block title %}Training Centrum Den Haag{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset("style.css") }}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous">
 
     {% endblock %}
@@ -92,14 +92,14 @@
         <img src="{{ asset("p3.png") }}" class="col-4 d-none d-xs-none d-sm-none d-md-none d-lg-block" alt="">
     </div>
     <br>
-        {% block body %}
-            <div class="container">
-                <h5 style="color:red">Homepagina Instructeur</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consectetur corporis dolores facere hic
-                    illo ipsam magni, nesciunt nobis non odit quae qui quo reiciendis repellat rerum vero? Doloremque,
-                    minima!</p>
-            </div>
-        {% endblock %}
+    {% block body %}
+        <div class="container">
+            <h5 style="color:red">Homepagina Instructeur</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consectetur corporis dolores facere hic
+                illo ipsam magni, nesciunt nobis non odit quae qui quo reiciendis repellat rerum vero? Doloremque,
+                minima!</p>
+        </div>
+    {% endblock %}
 </div>
 <footer class="footer" style="background-color: grey;">
     <div class="container text-center">
